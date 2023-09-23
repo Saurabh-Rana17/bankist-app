@@ -35,6 +35,19 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+// create login function //////////////////////////////////////////////
+const createLoginName = (accountsArr = []) => {
+  accountsArr.forEach((acc) => {
+    val = acc.owner;
+    val = val.toLowerCase();
+    let arr = val.split(" ");
+    let init = arr.map((el) => {
+      return el.slice(0, 1);
+    });
+    acc.username = init.join("");
+  });
+  console.log(accountsArr);
+};
 
 // Elements
 const labelWelcome = document.querySelector(".welcome");
@@ -95,6 +108,8 @@ const displayMovement = (movarray) => {
 };
 
 displayMovement(account1.movements);
+//function to euro to usd///////////////////////////////////////////////////////////////////////////////
 
 const eutousd = 1.1;
 const movusd = movements.map((el) => el * eutousd);
+//////function to create login////////////////////////////////////////////////////////////////////////////
