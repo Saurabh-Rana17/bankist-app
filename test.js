@@ -55,6 +55,10 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// data end////////////////////////////////////////
+
 const createLoginName = (accountsArr = []) => {
   accountsArr.forEach((acc) => {
     let val = acc.owner;
@@ -65,6 +69,61 @@ const createLoginName = (accountsArr = []) => {
     });
     acc.username = init.join("");
   });
-  console.log(accountsArr);
+  // console.log(accountsArr);
 };
 createLoginName(accounts);
+let arr = [1, 4, 7, 3, 6, 3, 9, 4, 9, 3, 5, 3, 5, 8, 9, 4, 5, 67];
+let f = movements.filter((el) => {
+  return el > 250;
+});
+// console.log(f)
+const withdrawal = movements.filter((el) => {
+  return el < 0;
+});
+// console.log(withdrawal);
+const total = arr.reduce((acc, curr) => {
+  acc += curr;
+  return acc;
+});
+// console.log(total);
+const findMax = arr.reduce((acc, curr) => {
+  acc = acc > curr ? acc : curr;
+  return curr;
+}, arr[0]);
+// console.log(findMax);
+
+// -----challenge-2--------------------------------------------------
+const calcAverageHumanAge = (arr = []) => {
+  let doghumanage = arr.forEach((dog) => {
+    // console.log();
+  });
+  // let doghumanage = arr.map((a) => {
+  //   if (a < 2) {
+  //     return a * 2;
+  //   } else {
+  //     return a * 4 + 16;
+  //   }
+  // });
+  // let above18 = doghumanage.filter((el) => {
+  //   return el >= 18;
+  // });
+  // let avg = doghumanage.reduce((a, c) => {
+  //   return a + c;
+  // });
+  // avg = Math.round(avg / arr.length);
+
+  // console.log(avg, doghumanage);
+};
+// calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+let ans = movements
+  .filter((val) => {
+    return val > 0;
+  })
+  .map((el) => {
+    return el * 1.1;
+  })
+  .reduce((a, c) => {
+    return a + c;
+  });
+
+console.log(movements.find((val) => val < 0));

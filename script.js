@@ -35,19 +35,6 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
-// create login function //////////////////////////////////////////////
-const createLoginName = (accountsArr = []) => {
-  accountsArr.forEach((acc) => {
-    val = acc.owner;
-    val = val.toLowerCase();
-    let arr = val.split(" ");
-    let init = arr.map((el) => {
-      return el.slice(0, 1);
-    });
-    acc.username = init.join("");
-  });
-  console.log(accountsArr);
-};
 
 // Elements
 const labelWelcome = document.querySelector(".welcome");
@@ -97,11 +84,11 @@ const displayMovement = (movarray) => {
     const type = element > 0 ? "deposit" : "withdrawal";
     const html = `
       <div class="movements__row">
-        <div class="movements__type movements__type--${type}">${
+      <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-              <div class="movements__value">${element}<div>
-      </div>
+              <div class="movements__value">${element} €<div>
+              </div>
     `;
     containerMovements.insertAdjacentHTML(`afterbegin`, html);
   });
@@ -112,4 +99,56 @@ displayMovement(account1.movements);
 
 const eutousd = 1.1;
 const movusd = movements.map((el) => el * eutousd);
-//////function to create login////////////////////////////////////////////////////////////////////////////
+//////function to calculate balance *// ////////////////////////////////////////////////////////////////////////////
+const calcDisplayBalance = (val = []) => {
+  let balance = val.reduce((acc, cur) => {
+    return acc + cur;
+  });
+  labelBalance.textContent = `${balance}€`;
+};
+calcDisplayBalance(account1.movements);
+// create login function //////////////////////////////////////////////
+const createLoginName = (accountsArr = []) => {
+  accountsArr.forEach((acc) => {
+    val = acc.owner;
+    val = val.toLowerCase();
+    let arr = val.split(" ");
+    let init = arr.map((el) => {
+      return el.slice(0, 1);
+    });
+    acc.username = init.join("");
+  });
+  console.log(accountsArr);
+};
+// ---function to implement summary -----------------------------
+let calcDisplaySummary = function (movements) {
+  const income = movements
+    .filter((val) => {
+      return val > 0;
+    })
+    .reduce((a, c) => {
+      return a + c;
+    });
+  const outgoing = movements
+    .filter((val) => {
+      return val < 0;
+    })
+    .reduce((a, c) => {
+      return a + c;
+    });
+  const interest = movements
+    .filter((val) => val > 0)
+    .map((val) => (val * 1.2) / 100)
+    .filter((val) => val >= 1)
+    .reduce((a, i) => a + i);
+  labelSumIn.textContent = `${income}€`;
+  labelSumOut.textContent = `${-outgoing}€`;
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcDisplaySummary(account1.movements);
+
+// const fist withdrawal function
+const account = accounts.find((val) => {
+  return val.owner === "Jessica Davis";
+});
+console.log(account);
